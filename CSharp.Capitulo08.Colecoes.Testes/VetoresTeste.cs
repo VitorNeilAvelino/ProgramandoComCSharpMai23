@@ -1,5 +1,8 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq.Expressions;
+
 namespace CSharp.Capitulo08.Colecoes.Testes
-{
+{    
     [TestClass]
     public class VetoresTeste
     {
@@ -24,6 +27,53 @@ namespace CSharp.Capitulo08.Colecoes.Testes
             }
 
             Console.WriteLine($"O tamanho do vetor {nameof(decimais)} é {decimais.Length}.");
+            
+            Console.WriteLine($"O primeiro decimal é {decimais[0]}.");
+            Console.WriteLine($"O último decimal é {decimais[decimais.Length - 1]}.");
+            Console.WriteLine($"O último decimal é {decimais[^1]}.");
+            Console.WriteLine($"O último decimal é {decimais.Last()}.");
+
+            var subConjunto = decimais[0..3];
+
+            foreach (var item in subConjunto)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        [TestMethod]
+        public void RedimensionamentoTeste()
+        {
+            var decimais = new decimal[] { 0.5m, 7m, 8.9m };
+
+            Array.Resize(ref decimais, 4);
+
+            decimais[3] = 4.6m;
+        }
+
+        [TestMethod]
+        public void OrdenacaoTeste()
+        {
+            var decimais = new decimal[] { 0.5m, 7m, 8.9m, -1.4m, 3 };
+
+            Array.Sort(decimais);
+
+            Assert.AreEqual(decimais[0], -1.4m);
+        }
+
+        [TestMethod]
+        public void TodaStringEhUmVetorTeste()
+        {
+            var nome = "Vítor";
+            nome += " Avelino";
+            // StringBuilder
+
+            Assert.AreEqual(nome[0], 'V');
+
+            foreach (var @char in nome)
+            {
+                Console.Write(@char);
+            }
         }
     }
 }
