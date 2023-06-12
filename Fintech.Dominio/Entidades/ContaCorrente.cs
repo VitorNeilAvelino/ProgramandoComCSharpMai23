@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Fintech.Dominio.Entidades
+﻿namespace Fintech.Dominio.Entidades
 {
     public class ContaCorrente
     {
@@ -16,7 +10,15 @@ namespace Fintech.Dominio.Entidades
 
         public void EfetuarOperacao(decimal valor, Operacao operacao)
         {
-
+            switch (operacao)
+            {
+                case Operacao.Deposito:
+                    Saldo += valor;
+                    break;
+                case Operacao.Saque:
+                    Saldo -= valor;
+                    break;
+            }
         }
     }
 }
