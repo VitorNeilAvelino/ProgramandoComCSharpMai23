@@ -9,7 +9,9 @@
     <TabControl>
         <TabItem Header="Clientes">
             <TabControl TabStripPlacement="Left">
-                <TabItem Header="Pesquisa"></TabItem>
+                <TabItem Header="Pesquisa" Name="pesquisaClienteTabItem">
+                    <DataGrid x:Name="clienteDataGrid" AutoGenerateColumns="True"/>
+                </TabItem>
                 <TabItem Header="Cadastro">
                     <StackPanel>
                         <DockPanel>
@@ -18,7 +20,7 @@
                         </DockPanel>
                         <DockPanel>
                             <Label Content="Nome:" HorizontalContentAlignment="Right" Width="120"/>
-                            <TextBox x:Name="nomeTextBox" Height="24" VerticalContentAlignment="Center" TextWrapping="NoWrap" Width="480" HorizontalAlignment="Left"/>
+                            <TextBox x:Name="nomeTextBox" Height="24" VerticalContentAlignment="Center" Width="480" HorizontalAlignment="Left"/>
                         </DockPanel>
                         <DockPanel>
                             <Label Content="Data de nascimento:" HorizontalContentAlignment="Right" Width="120"/>
@@ -27,6 +29,25 @@
                         <DockPanel>
                             <Label Content="Sexo:" HorizontalContentAlignment="Right" Width="120"/>
                             <ComboBox x:Name="sexoComboBox" Height="24" VerticalContentAlignment="Center" Width="150" HorizontalAlignment="Left"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <Label Content="Logradouro:" HorizontalContentAlignment="Right" Width="120"/>
+                            <TextBox x:Name="logradouroTextBox" Height="24" VerticalContentAlignment="Center" TextWrapping="NoWrap" Width="480" HorizontalAlignment="Left"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <Label Content="Número:" HorizontalContentAlignment="Right" Width="120"/>
+                            <TextBox x:Name="numeroLogradouroTextBox" Height="24" VerticalContentAlignment="Center" TextWrapping="NoWrap" Width="480" HorizontalAlignment="Left"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <Label Content="Cidade:" HorizontalContentAlignment="Right" Width="120"/>
+                            <TextBox x:Name="cidadeTextBox" Height="24" VerticalContentAlignment="Center" TextWrapping="NoWrap" Width="480" HorizontalAlignment="Left"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <Label Content="CEP:" HorizontalContentAlignment="Right" Width="120"/>
+                            <TextBox x:Name="cepTextBox" Height="24" VerticalContentAlignment="Center" TextWrapping="NoWrap" Width="480" HorizontalAlignment="Left"/>
+                        </DockPanel>
+                        <DockPanel>
+                            <Button x:Name="incluirClienteButton" Content="Incluir" Height="24" HorizontalAlignment="Left" Width="150" Margin="120 2 0 0" Click="incluirClienteButton_Click"/>
                         </DockPanel>                        
                     </StackPanel>
                 </TabItem>
