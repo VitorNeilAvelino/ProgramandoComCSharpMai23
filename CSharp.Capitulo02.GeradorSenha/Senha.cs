@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,12 @@ namespace CSharp.Capitulo02.GeradorSenha
 
         public Senha()
         {
+            Valor = Gerar();
+        }
+
+        public Senha(int tamanho)
+        {
+            Tamanho = tamanho;
             Valor = Gerar();
         }
 

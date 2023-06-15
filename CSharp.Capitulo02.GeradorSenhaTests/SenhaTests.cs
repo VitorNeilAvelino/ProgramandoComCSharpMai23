@@ -1,10 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CSharp.Capitulo02.GeradorSenha;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CSharp.Capitulo02.GeradorSenha.Tests
 {
@@ -35,6 +29,40 @@ namespace CSharp.Capitulo02.GeradorSenha.Tests
             Assert.AreEqual(senha.Valor.Length, Senha.TamanhoMinimo);
 
             Console.WriteLine(senha.Valor);
+        }
+
+        [TestMethod]
+        [DataRow(4)]
+        [DataRow(6)]
+        [DataRow(8)]
+        [DataRow(10)]
+        public void ConstrutorParametrizadoDeveRetornarSenhaComTamanhoEspecifico(int tamanho)
+        {
+            var senha = new Senha(tamanho);
+
+            Console.WriteLine(senha.Valor);
+        }
+
+        [TestMethod]
+        public void ValorPadraoTeste()
+        {
+            var valorPadrao = new ValorPadrao();
+
+            Assert.IsTrue(valorPadrao.Inteiro == 0);
+            Assert.IsTrue(valorPadrao.Decimal == 0);
+            Assert.IsTrue(valorPadrao.Nome == null);
+            Assert.IsTrue(valorPadrao.Booleano == false);
+            Assert.IsTrue(valorPadrao.Data == DateTime.MinValue);
+            Assert.IsTrue(valorPadrao.Senha == null);
+            Assert.IsTrue(valorPadrao.Nota == null);
+
+            Console.WriteLine(DateTime.MinValue);
+            Console.WriteLine(default(long));
+
+            //valorPadrao.Inteiro = null;
+            valorPadrao.Nota = null;
+
+            Console.WriteLine(valorPadrao.Nome?.Length);
         }
     }
 }

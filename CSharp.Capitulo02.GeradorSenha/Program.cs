@@ -4,15 +4,6 @@
     {
         static void Main(string[] args)
         {
-            //var quantidadeDigitos = 0;
-
-            //Console.Write("Informe a quantidade de dígitos da senha (entre 4 e 10): ");
-
-            //while (quantidadeDigitos == 0)
-            //{
-            //    quantidadeDigitos = ObterQuantidadeDigitos();
-            //}
-
             int quantidadeDigitos;
 
             do
@@ -21,20 +12,9 @@
                 quantidadeDigitos = ObterQuantidadeDigitos();
             } while (quantidadeDigitos == 0);
 
-            var senha = "";// string.Empty;
-            var randomico = new Random();
+            var senha = new Senha(quantidadeDigitos);
 
-            for (int i = 1; i <= quantidadeDigitos; i++)
-            {
-                //var algarismo = randomico.Next(0, 10);
-                //var algarismo = randomico.Next(1, 61);
-                var algarismo = randomico.Next(10);
-
-                //senha = senha + algarismo;
-                senha += algarismo;
-            }
-
-            Console.WriteLine($"Senha: {senha}");
+            Console.WriteLine($"Senha: {senha.Valor}");
         }
 
         private static int ObterQuantidadeDigitos()
