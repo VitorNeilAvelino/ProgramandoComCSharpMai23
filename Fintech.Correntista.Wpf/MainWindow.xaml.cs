@@ -36,6 +36,17 @@ namespace Fintech.Correntista.Wpf
             sexoComboBox.Items.Add(Sexo.Outro);
 
             clienteDataGrid.ItemsSource = clientes;
+
+            tipoContaComboBox.Items.Add(TipoConta.ContaCorrente);
+            tipoContaComboBox.Items.Add(TipoConta.ContaEspecial);
+            tipoContaComboBox.Items.Add(TipoConta.Poupanca);
+
+            var banco1 = new Banco();
+            banco1.Numero = 123;
+            banco1.Nome = "Banco Um";
+
+            bancoComboBox.Items.Add(banco1);
+            bancoComboBox.Items.Add(new Banco { Nome = "Banco Dois", Numero = 456 });
         }
 
         private void incluirClienteButton_Click(object sender, RoutedEventArgs e)
@@ -84,6 +95,56 @@ namespace Fintech.Correntista.Wpf
             numeroLogradouroTextBox.Clear();
             cidadeTextBox.Clear();
             cepTextBox.Clear();
+        }
+
+        private void SelecionarClienteButtonClick(object sender, RoutedEventArgs e)
+        {
+            var botaoClicado = (Button)sender;
+            var clienteSelecionado = (Cliente)botaoClicado.DataContext;
+
+            clienteTextBox.Text = $"{clienteSelecionado.Nome} - {clienteSelecionado.Cpf}";
+            contasTabItem.Focus();
+        }
+
+        private void tipoContaComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var tipoConta = (TipoConta)tipoContaComboBox.SelectedItem;
+
+            if (tipoConta == TipoConta.ContaEspecial)
+            {
+                limiteDockPanel.Visibility = Visibility.Visible;
+                limiteTextBox.Focus();
+            }
+            else
+            {
+                limiteDockPanel.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void incluirContaButton_Click(object sender, RoutedEventArgs e)
+        {
+            Conta conta = null;
+
+            var agencia = new Agencia();
+            agencia.Banco = (Banco)bancoComboBox.SelectedItem;
+            agencia.Numero = Convert.ToInt32(numeroAgenciaTextBox.Text);
+            agencia.DigitoVerificador = Convert.ToInt32(dvAgenciaTextBox.Text);
+
+            var numero = Convert.ToInt32(numeroContaTextBox.Text);
+            var digitoVerificador = dvContaTextBox.Text;
+
+            switch ((TipoConta)tipoContaComboBox.SelectedItem)
+            {
+                case TipoConta.ContaCorrente:
+                    conta = new ContaCorrente(agencia, numero, digitoVerificador);
+                    break;
+                case TipoConta.ContaEspecial:
+                    break;
+                case TipoConta.Poupanca:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
