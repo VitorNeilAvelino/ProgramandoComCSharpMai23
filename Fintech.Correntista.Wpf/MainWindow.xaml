@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Fintech Correntista" WindowState="Maximized" Height="450" Width="800">
     <TabControl>
-        <TabItem Header="Clientes">
+        <TabItem Header="Clientes" Name="clienteTabItem">
             <TabControl TabStripPlacement="Left">
                 <TabItem Header="Pesquisa" Name="pesquisaClienteTabItem">
                     <DataGrid x:Name="clienteDataGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserAddRows="False">

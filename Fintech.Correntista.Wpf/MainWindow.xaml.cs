@@ -21,7 +21,8 @@ namespace Fintech.Correntista.Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<Cliente> clientes = new ();
+        private List<Cliente> clientes = new();
+        private Cliente clienteSelecionado;
 
         public MainWindow() // Método construtor.
         {
@@ -78,7 +79,7 @@ namespace Fintech.Correntista.Wpf
             //clienteDataGrid.Items.Add(cliente);
 
             clientes.Add(cliente);
-            
+
             clienteDataGrid.Items.Refresh();
             MessageBox.Show("Cliente cadastrado com sucesso.");
             LimparControlesCliente();
@@ -100,7 +101,7 @@ namespace Fintech.Correntista.Wpf
         private void SelecionarClienteButtonClick(object sender, RoutedEventArgs e)
         {
             var botaoClicado = (Button)sender;
-            var clienteSelecionado = (Cliente)botaoClicado.DataContext;
+            clienteSelecionado = (Cliente)botaoClicado.DataContext;
 
             clienteTextBox.Text = $"{clienteSelecionado.Nome} - {clienteSelecionado.Cpf}";
             contasTabItem.Focus();
@@ -108,6 +109,11 @@ namespace Fintech.Correntista.Wpf
 
         private void tipoContaComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (tipoContaComboBox.SelectedItem == null) return;
+            //{
+            //    return;
+            //}
+
             var tipoConta = (TipoConta)tipoContaComboBox.SelectedItem;
 
             if (tipoConta == TipoConta.ContaEspecial)
@@ -137,14 +143,39 @@ namespace Fintech.Correntista.Wpf
             {
                 case TipoConta.ContaCorrente:
                     conta = new ContaCorrente(agencia, numero, digitoVerificador);
+                    //conta.Agencia = agencia;
                     break;
                 case TipoConta.ContaEspecial:
+                    var limite = Convert.ToDecimal(limiteTextBox.Text);
+                    conta = new ContaEspecial(agencia, numero, digitoVerificador, limite);
+                    //conta.Agencia = agencia;
+                    //conta.Limite = limite;
                     break;
                 case TipoConta.Poupanca:
+                    conta = new Poupanca(agencia, numero, digitoVerificador);
                     break;
-                default:
-                    break;
+                    //default:
+                    //    break;
             }
+
+            clienteSelecionado.Contas!.Add(conta!);
+
+            MessageBox.Show("Conta adicionada com sucesso.");
+            LimparControlesConta();
+            clienteDataGrid.Items.Refresh();
+            clienteTabItem.Focus();
+        }
+
+        private void LimparControlesConta()
+        {
+            clienteTextBox.Clear();
+            bancoComboBox.SelectedIndex = -1;
+            numeroAgenciaTextBox.Clear();
+            dvAgenciaTextBox.Clear();
+            numeroContaTextBox.Clear();
+            dvContaTextBox.Clear();
+            tipoContaComboBox.SelectedIndex = -1;
+            limiteTextBox.Clear();
         }
     }
 }
