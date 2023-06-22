@@ -9,9 +9,10 @@
         public decimal Saldo { get; set; }
         public List<Movimento> Movimentos { get; set; } = new List<Movimento>();
 
-        public virtual void EfetuarOperacao(decimal valor, Operacao operacao)
+        public virtual Movimento EfetuarOperacao(decimal valor, Operacao operacao, decimal limite = 0)
         {
             var sucesso = true;
+            Movimento? movimento = null;
 
             switch (operacao)
             {
@@ -19,7 +20,7 @@
                     Saldo += valor;
                     break;
                 case Operacao.Saque:
-                    if (Saldo >= valor)
+                    if (Saldo + limite >= valor)
                     {
                         Saldo -= valor; 
                     }
@@ -30,7 +31,14 @@
                     break;
             }
 
-            if(sucesso) Movimentos.Add(new Movimento(operacao, valor, this));
+            if (sucesso)
+            {
+                movimento = new Movimento(operacao, valor, this);
+                
+                Movimentos.Add(movimento);
+            }
+
+            return movimento;
         }
     }
 }
