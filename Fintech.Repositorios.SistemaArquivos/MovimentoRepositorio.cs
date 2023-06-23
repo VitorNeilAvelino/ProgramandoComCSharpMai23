@@ -6,6 +6,13 @@ namespace Fintech.Repositorios.SistemaArquivos
     {
         private const string DiretorioBase = "Dados";
 
+        public string Caminho { get; private set; }
+
+        public MovimentoRepositorio(string caminho)
+        {
+            Caminho = caminho;
+        }
+
         public void Inserir(Movimento movimento)
         {
             var registro = $"{movimento.Guid}|{movimento.Conta.Agencia.Numero}|{movimento.Conta.Numero}|" +
@@ -17,6 +24,37 @@ namespace Fintech.Repositorios.SistemaArquivos
             }
 
             File.AppendAllText(@$"{DiretorioBase}\Movimento.txt", registro + Environment.NewLine);
+        }
+
+        public List<Movimento> Selecionar(int numeroAgencia, int numeroConta)
+        {
+            var movimentos = new List<Movimento>();
+
+            foreach (var linha in File.ReadAllLines(Caminho))
+            {
+                if (linha == "") continue;
+                
+                var propriedades = linha.Split("|");
+
+                var guid = new Guid(propriedades[0]);
+                var propriedadeNumeroAgencia = Convert.ToInt32(propriedades[1]);
+                var propriedadeNumeroConta = Convert.ToInt32(propriedades[2]);
+                var data = Convert.ToDateTime(propriedades[3]);
+                var operacao = (Operacao)Convert.ToInt32(propriedades[4]);
+                var valor = Convert.ToDecimal(propriedades[5]);
+
+                if (numeroAgencia == propriedadeNumeroAgencia && 
+                    numeroConta == propriedadeNumeroConta)
+                {
+                    var movimento = new Movimento(operacao, valor, null);
+                    movimento.Data = data;
+                    movimento.Guid = guid;
+
+                    movimentos.Add(movimento);
+                }
+            }
+
+            return movimentos;
         }
     }
 }

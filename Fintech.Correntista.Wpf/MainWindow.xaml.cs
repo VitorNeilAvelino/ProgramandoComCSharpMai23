@@ -228,7 +228,7 @@ namespace Fintech.Correntista.Wpf
             var movimento = conta.EfetuarOperacao(valor, operacao);
 
             //Inserir();
-            var movimentoRepositorio = new MovimentoRepositorio();
+            var movimentoRepositorio = new MovimentoRepositorio("");
             movimentoRepositorio.Inserir(movimento);
 
             AtualizarGridMovimentacao(conta);
