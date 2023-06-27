@@ -22,8 +22,9 @@ namespace Fintech.Correntista.Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<Cliente> clientes = new();
+        private readonly List<Cliente> clientes = new();
         private Cliente clienteSelecionado;
+        private readonly MovimentoRepositorio movimentoRepositorio = new(Properties.Settings.Default.CaminhoArquivoMovimento);
 
         public MainWindow() // Método construtor.
         {
@@ -228,7 +229,7 @@ namespace Fintech.Correntista.Wpf
             var movimento = conta.EfetuarOperacao(valor, operacao);
 
             //Inserir();
-            var movimentoRepositorio = new MovimentoRepositorio("");
+            
             movimentoRepositorio.Inserir(movimento);
 
             AtualizarGridMovimentacao(conta);
@@ -236,10 +237,14 @@ namespace Fintech.Correntista.Wpf
 
         private void AtualizarGridMovimentacao(Conta conta)
         {
+            conta.Movimentos = movimentoRepositorio.Selecionar(conta.Agencia.Numero, conta.Numero);
+
             movimentacaoDataGrid.ItemsSource = conta.Movimentos;
             movimentacaoDataGrid.Items.Refresh();
 
-            saldoTextBox.Text = conta.Saldo.ToString();
+            //conta.Saldo = 10000000000000000;
+
+            saldoTextBox.Text = conta.Saldo.ToString("c");
         }
     }
 }
