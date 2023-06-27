@@ -6,20 +6,20 @@
         public Cliente Cliente { get; set; }
         public int Numero { get; set; }
         public string DigitoVerificador { get; set; }
-        public decimal Saldo 
+        public decimal Saldo
         {
             get { return TotalDeposito - TotalSaque; }
             private set { }
         }
 
-        public decimal TotalDeposito 
+        public decimal TotalDeposito
         {
             get
             {
                 return Movimentos
                     .Where(m => m.Operacao == Operacao.Deposito)
                     .Sum(m => m.Valor);
-            } 
+            }
             //set; 
         }
 
@@ -31,9 +31,6 @@
 
         public virtual Movimento EfetuarOperacao(decimal valor, Operacao operacao, decimal limite = 0)
         {
-            var sucesso = true;
-            Movimento? movimento = null;
-
             switch (operacao)
             {
                 case Operacao.Deposito:
@@ -42,21 +39,17 @@
                 case Operacao.Saque:
                     if (Saldo + limite >= valor)
                     {
-                        Saldo -= valor; 
+                        Saldo -= valor;
                     }
                     else
                     {
-                        sucesso = false;
+                        throw new SaldoInsuficienteException("Saldo insuficiente.");
                     }
                     break;
             }
 
-            if (sucesso)
-            {
-                movimento = new Movimento(operacao, valor, this);
-                
-                Movimentos.Add(movimento);
-            }
+            Movimento movimento = new(operacao, valor, this);
+            Movimentos.Add(movimento);
 
             return movimento;
         }
