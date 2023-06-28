@@ -216,9 +216,13 @@ namespace Fintech.Correntista.Wpf
         {
             if (contaComboBox.SelectedItem == null) return;
 
+            mainSpinner.Visibility = Visibility.Visible;
+
             var conta = (Conta)contaComboBox.SelectedItem;
 
             AtualizarGridMovimentacao(conta);
+
+            mainSpinner.Visibility = Visibility.Hidden;
         }
 
         private void incluirOperacaoButton_Click(object sender, RoutedEventArgs e)

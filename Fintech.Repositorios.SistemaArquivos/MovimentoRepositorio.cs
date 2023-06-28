@@ -28,6 +28,8 @@ namespace Fintech.Repositorios.SistemaArquivos
 
         public List<Movimento> Selecionar(int numeroAgencia, int numeroConta)
         {
+            Thread.Sleep(5000);
+
             var movimentos = new List<Movimento>();
 
             foreach (var linha in File.ReadAllLines(Caminho))
