@@ -1,8 +1,9 @@
 ﻿using Fintech.Dominio.Entidades;
+using Fintech.Dominio.Interfaces;
 
 namespace Fintech.Repositorios.SistemaArquivos
 {
-    public class MovimentoRepositorio
+    public class MovimentoRepositorio : IMovimentoRepositorio
     {
         private const string DiretorioBase = "Dados";
 
@@ -35,7 +36,7 @@ namespace Fintech.Repositorios.SistemaArquivos
             foreach (var linha in File.ReadAllLines(Caminho))
             {
                 if (linha == "") continue;
-                
+
                 var propriedades = linha.Split("|");
 
                 var guid = new Guid(propriedades[0]);
@@ -45,7 +46,7 @@ namespace Fintech.Repositorios.SistemaArquivos
                 var operacao = (Operacao)Convert.ToInt32(propriedades[4]);
                 var valor = Convert.ToDecimal(propriedades[5]);
 
-                if (numeroAgencia == propriedadeNumeroAgencia && 
+                if (numeroAgencia == propriedadeNumeroAgencia &&
                     numeroConta == propriedadeNumeroConta)
                 {
                     var movimento = new Movimento(operacao, valor, null);
