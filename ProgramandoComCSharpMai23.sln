@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintech.Repositorios.Sistem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintech.Repositorios.SqlServer", "Fintech.Repositorios.SqlServer\Fintech.Repositorios.SqlServer.csproj", "{945F0214-79A7-48CD-AA2D-ECD8BFCFA851}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintech.Repositorios.SqlServerTests", "Fintech.Repositorios.SqlServerTests\Fintech.Repositorios.SqlServerTests.csproj", "{FD9B1C95-8705-432E-BE95-C247988391BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -71,6 +73,10 @@ Global
 		{945F0214-79A7-48CD-AA2D-ECD8BFCFA851}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{945F0214-79A7-48CD-AA2D-ECD8BFCFA851}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{945F0214-79A7-48CD-AA2D-ECD8BFCFA851}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD9B1C95-8705-432E-BE95-C247988391BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD9B1C95-8705-432E-BE95-C247988391BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD9B1C95-8705-432E-BE95-C247988391BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD9B1C95-8705-432E-BE95-C247988391BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +88,7 @@ Global
 		{696D88D3-DFD3-427E-87FA-29B517FCE7F6} = {79F994B2-1C8F-46C8-BF48-401734BD6347}
 		{355567BE-0B40-4331-95BC-369757C10635} = {79F994B2-1C8F-46C8-BF48-401734BD6347}
 		{945F0214-79A7-48CD-AA2D-ECD8BFCFA851} = {79F994B2-1C8F-46C8-BF48-401734BD6347}
+		{FD9B1C95-8705-432E-BE95-C247988391BF} = {79F994B2-1C8F-46C8-BF48-401734BD6347}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A3D6CC07-822B-479C-AC1E-12B22A516D2B}

@@ -25,7 +25,8 @@ namespace CSharp.Capitulo02.GeradorSenha
         public int Tamanho { get; set; } = TamanhoMinimo;
         public string Valor { get; set; }
 
-        public string Gerar()
+        // ToDo - OO: Encapsulamento (private).
+        private string Gerar()
         {
             var senha = "";
             var randomico = new Random();

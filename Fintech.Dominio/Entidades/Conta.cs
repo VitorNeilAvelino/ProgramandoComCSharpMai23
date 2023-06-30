@@ -1,11 +1,14 @@
 ﻿namespace Fintech.Dominio.Entidades
 {
+    // ToDo - OO: Classe ou abstração.
     public abstract class Conta
     {
         public Agencia Agencia { get; set; }
         public Cliente Cliente { get; set; }
         public int Numero { get; set; }
         public string DigitoVerificador { get; set; }
+        
+        // ToDo - OO: Encapsulamento.
         public decimal Saldo
         {
             get { return TotalDeposito - TotalSaque; }

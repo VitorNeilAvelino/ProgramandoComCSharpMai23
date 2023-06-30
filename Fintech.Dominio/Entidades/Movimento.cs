@@ -2,6 +2,15 @@
 {
     public class Movimento
     {
+        /// <summary>
+        /// Construtor sem parâmetros - requisito do Dapper - não apagar.
+        /// </summary>
+        public Movimento()
+        {
+                
+        }
+
+        // ToDo - OO: Polimorfismo por sobrecarga.
         public Movimento(Operacao operacao, decimal valor, Conta conta)
         {
             Operacao = operacao;

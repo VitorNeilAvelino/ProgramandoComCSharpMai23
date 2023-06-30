@@ -1,5 +1,6 @@
 ﻿namespace Fintech.Dominio.Entidades
 {
+    // ToDo - OO: Herança.
     public class ContaCorrente : Conta
     {
         public ContaCorrente(Agencia agencia, int numero, string digitoVerificador)
