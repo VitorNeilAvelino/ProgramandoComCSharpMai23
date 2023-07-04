@@ -31,5 +31,24 @@ namespace Fintech.Repositorios.SistemaArquivos.Tests
                 Console.WriteLine($"{movimento.Data} - {movimento.Operacao} - {movimento.Valor}");
             }
         }
+
+        [TestMethod]
+        public void DelegateActionTeste()
+        {
+            var movimentos = movimentoRepositorio.Selecionar(1, 1);
+
+            movimentos.ForEach(EscreverMovimento);
+            
+            Action<Movimento> writeLine = m => Console.WriteLine($"{m.Data} - {m.Operacao} - {m.Valor}");
+
+            movimentos.ForEach(writeLine);
+
+            movimentos.ForEach(m => Console.WriteLine($"{m.Data} - {m.Operacao} - {m.Valor}"));
+        }
+
+        private void EscreverMovimento(Movimento movimento)
+        {
+                Console.WriteLine($"{movimento.Data} - {movimento.Operacao} - {movimento.Valor}");
+        }
     }
 }
